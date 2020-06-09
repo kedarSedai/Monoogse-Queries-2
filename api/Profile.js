@@ -2,32 +2,47 @@ const express = require('express');
 const router = express.Router();
 const Profile = require('../model/Profile');
 
-//Find all the documents
-router.get('/profile', (req, res) => {
-    // const query = req.query
-    Profile
-        .find({})
-        .then(data => res.json(data))
-        .catch(err => res.json(err))
-});
+// //Find all the documents
+// router.get('/profile', (req, res) => {
+//     // const query = req.query
+//     Profile
+//         .find({})
+//         .then(data => res.json(data))
+//         .catch(err => res.json(err))
+// });
 
-//Find the documents with age greater than 23
-router.get('/profile', (req, res) => {
+// //Finding documents with _id field
+// router.get('/profile', (req, res) => {
+//     Profile
+//         .find({}, {_id:0})
+//         .then(data => res.json(data))
+//         .catch(err => res.json(err))
+// });
+
+// //Find the documents with age greater than 23
+// router.get('/profile', (req, res) => {
     
-    Profile
-        .find({age:{$gt:23}})
-        .then(data => res.json(data))
-        .catch(err => res.json(err))
-});
+//     Profile
+//         .find({age:{$gt:23}})
+//         .then(data => res.json(data))
+//         .catch(err => res.json(err))
+// });
 
-//Find the documents with querying in parameters
+// //Find the documents with querying in parameters
+// router.get('/profile', (req, res) => {
+//     const query = req.query
+//     Profile
+//         .find({query})
+//         .then(data => res.json(data))
+//         .catch(err => res.json(err))
+// });
+
 router.get('/profile', (req, res) => {
-    const query = req.query
     Profile
-        .find({query})
+        .find({}, {$match:{firstName:'tham'}})
         .then(data => res.json(data))
-        .catch(err => res.json(err))
-});
+        .catch(err => res.json(err));
+})
 
 //Find documents br profile id from query in url
 router.get('/profile/:id', (req, res) =>{
