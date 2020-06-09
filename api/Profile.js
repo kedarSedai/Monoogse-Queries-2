@@ -20,6 +20,15 @@ router.get('/profile', (req, res) => {
         .catch(err => res.json(err))
 });
 
+//Find the documents with querying in parameters
+router.get('/profile', (req, res) => {
+    const query = req.query
+    Profile
+        .find({age:{query}})
+        .then(data => res.json(data))
+        .catch(err => res.json(err))
+});
+
 //Find documents br profile id from query in url
 router.get('/profile/:id', (req, res) =>{
     const id = req.params.id;
