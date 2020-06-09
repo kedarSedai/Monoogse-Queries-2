@@ -14,7 +14,7 @@ router.get('/profile', (req, res) => {
 //Using match to match the documemts it is like Where clause in SQL
 router.get('/profile', (req, res) => {
     Profile
-        .aggregate([{$match:{firstName:'tham'}}])
+        .aggregate([{$match:{ firstName:'tham' }}])
         .then(data => res.json(data))
         .catch(err => res.json(err))
 });
@@ -38,7 +38,7 @@ router.get('/profile', (req, res) => {
 //Finding documents without _id field
 router.get('/profile', (req, res) => {
     Profile
-        .find({}, {_id:0})
+        .find({}, { _id:0 })
         .then(data => res.json(data))
         .catch(err => res.json(err))
 });
@@ -47,7 +47,7 @@ router.get('/profile', (req, res) => {
 router.get('/profile', (req, res) => {
     
     Profile
-        .find({age:{$gt:23}})
+        .find({age:{ $gt:23 }})
         .then(data => res.json(data))
         .catch(err => res.json(err))
 });
@@ -56,7 +56,7 @@ router.get('/profile', (req, res) => {
 router.get('/profile', (req, res) => {
     const query = req.query
     Profile
-        .find({query})
+        .find({ query })
         .then(data => res.json(data))
         .catch(err => res.json(err))
 });
