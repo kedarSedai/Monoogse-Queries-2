@@ -11,6 +11,30 @@ router.get('/profile', (req, res) => {
         .catch(err => res.json(err))
 });
 
+//Using match to match the documemts it is like Where clause in SQL
+router.get('/profile', (req, res) => {
+    Profile
+        .aggregate([{$match:{firstName:'tham'}}])
+        .then(data => res.json(data))
+        .catch(err => res.json(err))
+});
+
+//Used to populate specific field's value
+router.get('/profile', (req, res) => {
+    Profile
+        .aggregate([{$match:{firstName:'tham'}}, {$project:{"firstName":1, "age": 1, _id:0 }}])
+        .then(data => res.json(data))
+        .catch(err => res.json(err))
+});
+
+//Documents are group by age
+router.get('/profile', (req, res) => {
+    Profile
+        .aggregate([{$group:{"_id":"$age"}}])
+        .then(data => res.json(data))
+        .catch(err => res.json(err))
+});
+
 //Finding documents without _id field
 router.get('/profile', (req, res) => {
     Profile
@@ -36,7 +60,6 @@ router.get('/profile', (req, res) => {
         .then(data => res.json(data))
         .catch(err => res.json(err))
 });
-
 
 //Find documents br profile id from query in url
 router.get('/profile/:id', (req, res) =>{
