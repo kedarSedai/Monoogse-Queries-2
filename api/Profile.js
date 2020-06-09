@@ -71,6 +71,23 @@ router.get('/profile/:id', (req, res) =>{
         .catch(err => res.json({ message: err }))
 });
 
+//Sort by desending alphabet
+router.get('/profile', (req, res) => {
+    const sortName = { firstName: -1 }
+    Profile
+        .find({}).sort(sortName)
+        .then(data => res.json(data))
+        .catch(err => res.json(err))
+});
+
+//Sort by asending alphabet
+router.get('/profile', (req, res) => {
+    Profile
+        .find({}).sort('firstName')
+        .then(data => res.json(data))
+        .catch(err => res.json(err))
+});
+
 //Saving documents 
 router.post('/profile', async (req, res) => {
     const profile = new Profile({
