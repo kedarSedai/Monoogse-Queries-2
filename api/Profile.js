@@ -24,7 +24,7 @@ router.get('/profile', (req, res) => {
 router.get('/profile', (req, res) => {
     const query = req.query
     Profile
-        .find({age:{query}})
+        .find({query})
         .then(data => res.json(data))
         .catch(err => res.json(err))
 });
@@ -69,7 +69,6 @@ router.patch('/profile/:id', async(req, res) => {
 });
 
 //delete profile by id 
-
 router.delete('/profile/:id', async(req, res) => {
     try {
     const deleteProfile = await Profile.deleteOne({_id: req.params.id});
