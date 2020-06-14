@@ -75,7 +75,8 @@ router.get('/profile/:id', (req, res) =>{
 router.get('/profile', (req, res) => {
     const sortName = { firstName: -1 }
     Profile
-        .find({}).sort(sortName)
+        .find({})
+        .sort(sortName)
         .then(data => res.json(data))
         .catch(err => res.json(err))
 });
@@ -83,7 +84,8 @@ router.get('/profile', (req, res) => {
 //Sort by asending alphabet
 router.get('/profile', (req, res) => {
     Profile
-        .find({}).sort('firstName')
+        .find({})
+        .sort('firstName')
         .then(data => res.json(data))
         .catch(err => res.json(err))
 });
@@ -97,7 +99,7 @@ router.post('/profile', async (req, res) => {
         position: req.body.position,
         team: req.body.team
     });
-    try{
+    try {
         const saveProfile = await profile.save();
         res.json(saveProfile)
     }
